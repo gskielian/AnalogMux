@@ -3,7 +3,7 @@
 #define s2 10
 
 #define e0 6
-#define e1 5
+#define e1 7
 
 #define arrayLength 16
 
@@ -87,7 +87,7 @@ int sensorReading=0;
     if (enableBit == 1) {
       sensorReading = *(arrayPointer + i + 8) = analogRead(A0);
     } else {
-      sensorReading = *(arrayPointer + i) = analogRead(A1);
+      sensorReading = *(arrayPointer + i) = analogRead(A0);
     }
 
     /*
