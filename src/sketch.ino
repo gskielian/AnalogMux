@@ -1,9 +1,11 @@
-#define s0 8
-#define s1 9
-#define s2 10
+#define s0 2
+#define s1 3
+#define s2 4
 
-#define e0 6
-#define e1 7
+#define e0 5
+#define e1 6
+
+#define AnalogPin A1
 
 #define arrayLength 16
 
@@ -85,9 +87,9 @@ int sensorReading=0;
     }
 
     if (enableBit == 1) {
-      sensorReading = *(arrayPointer + i + 8) = analogRead(A0);
+      sensorReading = *(arrayPointer + i + 8) = analogRead(AnalogPin);
     } else {
-      sensorReading = *(arrayPointer + i) = analogRead(A0);
+      sensorReading = *(arrayPointer + i) = analogRead(AnalogPin);
     }
 
     /*
