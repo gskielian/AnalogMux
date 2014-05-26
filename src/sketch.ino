@@ -40,44 +40,55 @@ void printResults( int * arrayPointer) {
   int i;
   Serial.print("[" );
 
-  for(i=0; i < arrayLength; i++ ){
+  for(i=0; i < (arrayLength - 1); i++ ){
     Serial.print(*(arrayPointer + i));
     Serial.print(",");
   }
 
+  Serial.print(*(arrayPointer + i));
   Serial.println("]");
 }
 
 
 void readSensors( int* arrayPointer, int enableBit) {
+int sensorReading=0;
   if (enableBit == 0) {
+    digitalWrite(e1,1);
+    digitalWrite(e0,0);
+  } else {
     digitalWrite(e0,1);
     digitalWrite(e1,0);
-  } else {
-    digitalWrite(e0,0);
-    digitalWrite(e1,1);
-    arrayPointer += 8;
   }
 
 
   int i;
   for ( i = 0; i <= 7 ; i++ ) {
-    r0=( count & 0x01);
-    r1=( (count>>1) & 0x01);
-    r2=( (count>>2) & 0x01);
+    r0=( i & 0x01);
+    r1=( ( i >>1) & 0x01);
+    r2=( ( i >>2) & 0x01);
+    Serial.print(" ");
+    Serial.print(r0);
+    Serial.print(" ");
+    Serial.print(r1);
+    Serial.print(" ");
+    Serial.println(r2);
 
     digitalWrite(s0,r0);
     digitalWrite(s1,r1);
     digitalWrite(s2,r2);
 
-    Serial.print("Reading on ");
-    Serial.print(count);
-    Serial.print(" is ");
-    *arrayPointer = analogRead(A0);
-    Serial.println(*arrayPointer);
+    if (enableBit == 1) {
+      sensorReading = *(arrayPointer + i + 8) = analogRead(A0);
+    } else {
+      sensorReading = *(arrayPointer + i) = analogRead(A1);
+    }
 
-    (count >=7) ? count=0 : count++;
-    delay(100);
+    Serial.print("Reading on ");
+    Serial.print(i + enableBit*8);
+    Serial.print(" is ");
+    Serial.println(sensorReading);
+
+    delay(400);
   }
 
 }
