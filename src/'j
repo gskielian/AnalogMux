@@ -1,0 +1,30 @@
+#define s0 8
+#define s1 9
+#define s2 10
+
+void setup()
+{
+  pinMode(s0,OUTPUT);
+  pinMode(s1,OUTPUT);
+  pinMode(s2,OUTPUT);
+
+  digitalWrite(s0,LOW);
+  digitalWrite(s1,LOW);
+  digitalWrite(s2,LOW);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int i=0;
+  for ( i = 0; i <= 7 ; i++ ) {
+
+    digitalWrite(s0,LOW);
+    digitalWrite(s1,LOW);
+    digitalWrite(s2,LOW);
+    Serial.print("value of the analog Read is: ");
+    Serial.println(analogRead(A0));
+    delay(1000);
+  }
+}
