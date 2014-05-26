@@ -21,6 +21,9 @@ void setup()
   pinMode(s1,OUTPUT);
   pinMode(s2,OUTPUT);
 
+  pinMode(e0,OUTPUT);
+  pinMode(e1,OUTPUT);
+
   digitalWrite(s0,LOW);
   digitalWrite(s1,LOW);
   digitalWrite(s2,LOW);
@@ -52,13 +55,6 @@ void printResults( int * arrayPointer) {
 
 void readSensors( int* arrayPointer, int enableBit) {
 int sensorReading=0;
-  if (enableBit == 0) {
-    digitalWrite(e1,1);
-    digitalWrite(e0,0);
-  } else {
-    digitalWrite(e0,1);
-    digitalWrite(e1,0);
-  }
 
 
   int i;
@@ -80,18 +76,28 @@ int sensorReading=0;
     digitalWrite(s1,r1);
     digitalWrite(s2,r2);
 
+    if (enableBit == 0) {
+      digitalWrite(e1,1);
+      digitalWrite(e0,0);
+    } else {
+      digitalWrite(e0,1);
+      digitalWrite(e1,0);
+    }
+
     if (enableBit == 1) {
       sensorReading = *(arrayPointer + i + 8) = analogRead(A0);
     } else {
       sensorReading = *(arrayPointer + i) = analogRead(A1);
     }
 
+    /*
     Serial.print("Reading on ");
     Serial.print(i + enableBit*8);
     Serial.print(" is ");
     Serial.println(sensorReading);
+    */
 
-    delay(400);
+    delay(10);
   }
 
 }
