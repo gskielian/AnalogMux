@@ -66,12 +66,15 @@ int sensorReading=0;
     r0=( i & 0x01);
     r1=( ( i >>1) & 0x01);
     r2=( ( i >>2) & 0x01);
+
+    /*
     Serial.print(" ");
     Serial.print(r0);
     Serial.print(" ");
     Serial.print(r1);
     Serial.print(" ");
     Serial.println(r2);
+    */
 
     digitalWrite(s0,r0);
     digitalWrite(s1,r1);
